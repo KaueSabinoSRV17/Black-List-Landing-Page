@@ -1,19 +1,30 @@
-import { useState } from 'react'
-import { app } from './../firebaseconfig'
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { Member, getAllDocsFromCollection } from './backend/database'
 
 
 export default function App() {
+  
+  const [members, setMembers] = useState<Member[]>()
 
-  const [members, setMembers] = useState<any[]>()
+  async function getMembers() {
+    const members = await getAllDocsFromCollection('members')
+    setMembers(members)
+  }
 
-  const db = getFirestore(app)
-  const documentsReference = collection(db, 'members')
-  const documents = getDocs(documentsReference)
-  documents.then(docs => docs.forEach(doc => console.log(doc.data())))
+  useEffect(() => {
+    getMembers()
+  })
   
 
-  return (
-    <h1>Firebase is on!</h1>
-  )
+  return members?.map(member => {
+    return (
+      <ul key={member.email}>
+        <li>{member.name}</li>
+        <li>{member.email}</li>
+        <li>{member.cellphone}</li>
+        <li>{member.instrument}</li>
+        <li>{member.bio}</li>
+      </ul>
+    )
+  })
 }
