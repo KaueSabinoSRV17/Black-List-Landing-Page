@@ -16,15 +16,29 @@ export default function App() {
   })
   
 
-  return members?.map(member => {
-    return (
-      <ul key={member.email}>
-        <li>{member.name}</li>
-        <li>{member.email}</li>
-        <li>{member.cellphone}</li>
-        <li>{member.instrument}</li>
-        <li>{member.bio}</li>
-      </ul>
-    )
-  })
+  return (
+    <form className='flex flex-col w-fit mx-auto'>
+      <legend>Tem interesse em nos contratar?</legend>
+
+      <label className='flex flex-col w-fit'>
+        Seu nome...
+        <input type="text" className='border-black border' />
+      </label>
+
+      <label className='flex flex-col w-fit'>
+        Seu e-mail...
+        <input type="text" className='border-black border'/>
+      </label>
+
+      <label className='flex flex-col w-fit'>
+        Seu telefone...
+        <input type="text" className='border-black border' />
+      </label>
+
+      <button className='bg-green-300'>
+        Enviar
+      </button>
+
+    </form>
+  )
 }
