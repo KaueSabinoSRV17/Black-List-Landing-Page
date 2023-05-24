@@ -5,6 +5,6 @@ import { Contact } from './types'
 const FUNCTIONS = getFunctions(app)
 
 export async function sendEmail(contact: Contact) {
-  const functionCallable = httpsCallable(FUNCTIONS, 'sendEmail')
+  const functionCallable = httpsCallable(FUNCTIONS, 'sendEmailCallable')
   await functionCallable(contact)
 }
